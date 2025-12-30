@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PrimeHub AI - Smart Inline Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @font-face {
+        font-family: 'Avenir Light';
+        src: local('Avenir-Light'), local('Avenir Light'), local('HelveticaNeue-Light'), local('Helvetica Neue Light'), sans-serif;
+        font-weight: 300;
+      }
+      
+      body {
+        font-family: "Avenir Light", "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #05070A;
+        color: white;
+        margin: 0;
+        font-weight: 300;
+      }
+      
+      h1, h2, h3, h4, h5, h6, button, input, textarea, div, span, p, a {
+        font-family: "Avenir Light", "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+      }
+
+      .tracking-tighter {
+        letter-spacing: -0.05em;
+      }
+      
+      .selection\:bg-blue-100 *::selection {
+        background-color: #dbeafe;
+        color: #1e40af;
+      }
+      
+      /* ContentEditable Clean Focus */
+      [contenteditable="true"]:focus {
+        outline: none;
+      }
+      
+      /* Custom Scrollbar */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #e2e8f0;
+        border-radius: 10px;
+        border: 2px solid white;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #cbd5e1;
+      }
+      
+      @media (max-width: 640px) {
+        body {
+          font-size: 14px;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
