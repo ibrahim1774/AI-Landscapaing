@@ -58,8 +58,14 @@ export class VercelDeployer {
             );
 
             const deploymentUrl = response.data.url;
+            const aliases = response.data.alias || [];
+            const finalUrl = aliases.length > 0 ? aliases[0] : deploymentUrl;
+
             console.log(`[Deploy] Success! Deployment URL: https://${deploymentUrl}`);
-            return `https://${deploymentUrl}`;
+            if (aliases.length > 0) {
+                console.log(`[Deploy] Using production alias: https://${finalUrl}`);
+            }
+            return `https://${finalUrl}`;
         } catch (error: any) {
             console.error('[Deploy] Error deploying to Vercel:', error.response?.data || error.message);
             throw error;
