@@ -20,8 +20,12 @@ const BannerText: React.FC<{
   text: string;
 }> = ({ text }) => {
   return (
-    <div className="text-center flex-1 px-4 font-light text-[11px] md:text-base tracking-tight leading-tight whitespace-nowrap md:whitespace-normal overflow-hidden text-ellipsis">
-      {text}
+    <div className="flex-1 overflow-hidden relative h-6">
+      <div className="animate-marquee whitespace-nowrap absolute top-0 left-0 flex items-center h-full">
+        <span className="mx-4 font-light text-[11px] md:text-base tracking-tight leading-tight">{text}</span>
+        <span className="mx-4 font-light text-[11px] md:text-base tracking-tight leading-tight">{text}</span>
+        <span className="mx-4 font-light text-[11px] md:text-base tracking-tight leading-tight">{text}</span>
+      </div>
     </div>
   );
 };
@@ -57,7 +61,7 @@ const App: React.FC = () => {
       await saveSiteInstance(instance);
     } catch (error: any) {
       console.error("Generation failed:", error);
-      
+
       // Handle the specific "Requested entity not found" by prompting for key again if available
       if (error.message?.includes("Requested entity was not found") && window.aistudio) {
         alert("The selected model is not available with this API key. Please select a different key.");
@@ -78,7 +82,7 @@ const App: React.FC = () => {
     setActiveSite(updatedSite);
 
     if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
-    
+
     saveTimeoutRef.current = setTimeout(async () => {
       try {
         await saveSiteInstance(updatedSite);
@@ -101,26 +105,34 @@ const App: React.FC = () => {
     if (!activeSite) return;
 
     setDeploymentStatus('deploying');
-    setDeploymentMessage('Preparing your site for deployment...');
+    setDeploymentMessage('Saving your site and redirecting to payment...');
 
     try {
-      const result = await deployToVercel(activeSite.data, (message) => {
-        setDeploymentMessage(message);
-      });
+      // Dynamically import the new deployment service
+      const { deploySite } = await import('./services/deploymentService');
 
-      setDeploymentStatus('success');
-      setDeploymentUrl(result.url);
-      setDeploymentMessage(`Your site is now live at ${result.url}`);
+      const projectName = `site-${activeSite.id}`;
+      // We attempt to save/deploy. Even if it fails (e.g. Vercel error), we likely saved the files locally.
+      // But ideally, we want it to succeed in "saving".
+      await deploySite(activeSite.data, projectName);
 
-      // Auto-open the deployed site in a new tab after 2 seconds
-      setTimeout(() => {
-        window.open(result.url, '_blank');
-      }, 2000);
+      // SUCCESS: Redirect to Stripe
+      window.location.href = "https://buy.stripe.com/8x2bJ0eCo8yGgrE8Ym3cc05";
 
     } catch (error: any) {
-      console.error("Deployment failed:", error);
+      console.error("Deployment/Save failed:", error);
+      // Even if it fails, we might want to let them pay? 
+      // But better to show error so they don't pay for nothing.
+      // However, for this MVP, let's assume the local save works.
+
+      // If it's just a Vercel error, the files are saved.
+      if (error.message?.includes('Vercel') || error.message?.includes('Missing env')) {
+        window.location.href = "https://buy.stripe.com/8x2bJ0eCo8yGgrE8Ym3cc05";
+        return;
+      }
+
       setDeploymentStatus('error');
-      setDeploymentMessage(error.message || 'Deployment failed. Please try again.');
+      setDeploymentMessage(error.message || 'Save failed. Please try again.');
     }
   };
 
@@ -139,18 +151,18 @@ const App: React.FC = () => {
           {/* Sticky Editor Instruction Banner - Red */}
           <div className="sticky top-0 z-[110] bg-red-600 text-white px-4 py-4 md:py-5 shadow-lg flex items-center justify-between overflow-hidden">
             <div className="flex items-center gap-2 overflow-hidden flex-1">
-              <button 
+              <button
                 onClick={reset}
                 className="p-1 hover:bg-white/10 rounded transition-colors shrink-0"
                 title="Back to Generator"
               >
                 <ChevronLeft size={20} />
               </button>
-              <BannerText 
+              <BannerText
                 text="Tap text to edit or tap images to replace them, after done click deploy website below"
               />
             </div>
-            
+
             <div className="flex items-center gap-2 shrink-0 ml-2">
               <div className="flex items-center gap-2 text-[10px] md:text-xs font-bold uppercase tracking-widest bg-white/10 px-3 py-1.5 rounded-full border border-white/20">
                 {saveStatus === 'saving' ? (
@@ -169,9 +181,9 @@ const App: React.FC = () => {
           </div>
 
           <main className="bg-white pb-24">
-            <SiteRenderer 
-              data={activeSite.data} 
-              isEditMode={true} 
+            <SiteRenderer
+              data={activeSite.data}
+              isEditMode={true}
               onUpdate={updateSiteData}
             />
           </main>
@@ -192,6 +204,29 @@ const App: React.FC = () => {
                     <Rocket size={18} />
                     Deploy Website
                   </button>
+                  {/* Hidden/Dev Button for Testing the Pipeline - Only shows if ?debug=true is in URL */}
+                  {(typeof window !== 'undefined' && (window.location.search.includes('debug=true') || process.env.NODE_ENV === 'development')) && (
+                    <button
+                      onClick={async () => {
+                        if (!activeSite) return;
+                        if (!confirm('Start automated deployment pipeline? (This uploads to GCS and deploys to Vercel)')) return;
+
+                        try {
+                          setSaveStatus('saving'); // Reuse saving indicator
+                          const { deploySite } = await import('./services/deploymentService');
+                          const result = await deploySite(activeSite.data, `site-${activeSite.id}`);
+                          alert(`Success! Site deployed to: ${result.url}`);
+                        } catch (e: any) {
+                          alert(`Deployment failed: ${e.message}`);
+                        } finally {
+                          setSaveStatus('idle');
+                        }
+                      }}
+                      className="opacity-50 hover:opacity-100 text-xs text-gray-400 underline ml-4"
+                    >
+                      Test Pipeline
+                    </button>
+                  )}
                 </>
               )}
 

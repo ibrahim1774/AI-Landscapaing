@@ -72,12 +72,12 @@ const EditableImage: React.FC<{
             <Camera className="text-blue-600 w-5 h-5" />
             <span className="text-blue-900 font-bold text-xs uppercase tracking-tight">📷 Replace image</span>
           </div>
-          <input 
-            type="file" 
-            ref={fileInputRef} 
-            className="hidden" 
-            accept="image/*" 
-            onChange={handleFileChange} 
+          <input
+            type="file"
+            ref={fileInputRef}
+            className="hidden"
+            accept="image/*"
+            onChange={handleFileChange}
           />
         </div>
       )}
@@ -102,14 +102,14 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
   return (
     <div className="min-h-screen bg-white text-gray-900 selection:bg-blue-100 font-light" style={{ fontFamily: '"Avenir Light", Avenir, sans-serif' }}>
       {/* Dynamic Nav */}
-      <nav className="fixed top-[48px] md:top-[64px] left-0 right-0 z-[90] bg-white/95 backdrop-blur-md border-b border-gray-100 py-2.5 px-6 md:px-12 flex justify-between items-center transition-all">
+      <nav className={`fixed ${isEditMode ? 'top-[48px] md:top-[64px]' : 'top-0'} left-0 right-0 z-[90] bg-white/95 backdrop-blur-md border-b border-gray-100 py-2.5 px-6 md:px-12 flex justify-between items-center transition-all`}>
         <EditableText
           text={data.contact.companyName.toUpperCase()}
           isEditMode={isEditMode}
           onBlur={(val) => updateField('contact.companyName', val)}
           className="font-bold text-lg md:text-xl tracking-tighter"
         />
-        <a 
+        <a
           href={`tel:${data.contact.phone}`}
           className="bg-blue-600 text-white px-5 py-2 rounded-xl font-bold text-xs md:text-sm transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-blue-500/10 uppercase tracking-tighter"
           style={{ backgroundColor: primaryColor }}
@@ -117,7 +117,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
           <EditableText
             text="Get an estimate"
             isEditMode={isEditMode}
-            onBlur={() => {}} 
+            onBlur={() => { }}
             className="inline"
           />
         </a>
@@ -135,7 +135,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
           />
           <div className="absolute inset-0 bg-black/70 md:bg-black/60"></div>
         </div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center py-8">
           <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full bg-blue-600/20 backdrop-blur-md border border-blue-400/30 text-blue-100 text-[9px] md:text-[10px] font-bold tracking-[0.2em] uppercase">
             <Sparkles size={12} className="text-blue-400" />
@@ -145,24 +145,24 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
               onBlur={(val) => updateField('hero.badge', val)}
             />
           </div>
-          <h1 className="text-white text-3xl md:text-[64px] font-bold tracking-tighter leading-[0.95] mb-6 max-w-5xl mx-auto">
-            <EditableText 
-              text={data.hero.headline.line1} 
-              isEditMode={isEditMode} 
-              onBlur={(val) => updateField('hero.headline.line1', val)} 
+          <h1 className="text-white text-3xl md:text-[56px] font-bold tracking-tight leading-tight mb-6 max-w-5xl mx-auto">
+            <EditableText
+              text={data.hero.headline.line1}
+              isEditMode={isEditMode}
+              onBlur={(val) => updateField('hero.headline.line1', val)}
               className="block opacity-90"
             />
-            <EditableText 
-              text={data.hero.headline.line2} 
-              isEditMode={isEditMode} 
-              onBlur={(val) => updateField('hero.headline.line2', val)} 
+            <EditableText
+              text={data.hero.headline.line2}
+              isEditMode={isEditMode}
+              onBlur={(val) => updateField('hero.headline.line2', val)}
               className="block"
               style={{ color: primaryColor }}
             />
-            <EditableText 
-              text={data.hero.headline.line3} 
-              isEditMode={isEditMode} 
-              onBlur={(val) => updateField('hero.headline.line3', val)} 
+            <EditableText
+              text={data.hero.headline.line3}
+              isEditMode={isEditMode}
+              onBlur={(val) => updateField('hero.headline.line3', val)}
               className="block opacity-80"
             />
           </h1>
@@ -172,16 +172,16 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
             onBlur={(val) => updateField('hero.subtext', val)}
             className="max-w-2xl mx-auto text-gray-300 text-sm md:text-base font-light leading-relaxed mb-8"
           />
-          
+
           <div className="flex flex-col items-center gap-6">
             {/* Formatted CTA - Single line with colon and hyphenated phone */}
-            <a 
+            <a
               href={`tel:${data.contact.phone}`}
               className="w-full sm:w-auto px-8 md:px-12 py-5 bg-white text-blue-900 font-bold rounded-2xl shadow-2xl transition-all hover:scale-[1.02] active:scale-[0.98] uppercase tracking-tighter text-sm md:text-2xl whitespace-nowrap overflow-hidden inline-flex items-center justify-center gap-1"
             >
               Get An Estimate: {formatPhoneNumber(data.contact.phone)}
             </a>
-            
+
             {/* Professional Service Range area with 7 bullets total */}
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-white/70 font-bold text-[9px] md:text-[11px] uppercase tracking-widest max-w-4xl mx-auto">
               <div className="flex items-center gap-2">
@@ -219,7 +219,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
               <EditableText
                 text="Comprehensive Services Offered"
                 isEditMode={isEditMode}
-                onBlur={() => {}}
+                onBlur={() => { }}
                 className="text-3xl md:text-4xl font-bold tracking-tighter text-gray-900"
                 as="h2"
               />
@@ -340,7 +340,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
               onBlur={(val) => updateField('aboutUs.content', val)}
               className="text-gray-600 text-xs md:text-sm font-light leading-relaxed mb-6"
             />
-            <a 
+            <a
               href={`tel:${data.contact.phone}`}
               className="inline-block px-6 py-3 bg-gray-900 text-white font-bold rounded-xl uppercase text-[10px] tracking-tighter"
             >
@@ -366,7 +366,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
             <EditableText
               text="Practical Value & Protection"
               isEditMode={isEditMode}
-              onBlur={() => {}}
+              onBlur={() => { }}
               className="text-2xl md:text-3xl font-bold tracking-tighter mb-2 uppercase"
               as="h2"
             />
