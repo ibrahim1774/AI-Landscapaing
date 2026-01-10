@@ -215,7 +215,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
       {/* Services Section */}
       <section className="py-12 md:py-18 px-6 md:px-12 bg-slate-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-24">
+          <div className="text-center mb-12">
             <div className="text-blue-600 font-black text-xs uppercase tracking-[0.2em] mb-4">What We Do</div>
             <h2 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 mb-6">Expert Solutions</h2>
             <div className="w-24 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
@@ -359,7 +359,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
       <section className="py-12 md:py-20 px-6 md:px-12 bg-slate-950 text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-600/10 skew-x-12 translate-x-1/2"></div>
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8">
             <div className="max-w-2xl">
               <div className="text-blue-400 font-bold text-xs uppercase tracking-[0.2em] mb-4">Our Method</div>
               <EditableText
@@ -415,7 +415,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
       {/* FAQ Section */}
       <section className="py-12 md:py-20 px-6 md:px-12 bg-slate-50">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-24">
+          <div className="text-center mb-12">
             <div className="text-blue-600 font-bold text-xs uppercase tracking-[0.2em] mb-4">FAQ</div>
             <h2 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-6">Common Questions</h2>
             <div className="w-20 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
@@ -462,7 +462,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
       <section className="bg-slate-900 py-16 px-6 text-center text-white">
         <div className="max-w-3xl mx-auto space-y-10">
           <h2 className="text-4xl md:text-7xl font-black tracking-tighter leading-none mb-4">Ready to start your project?</h2>
-          <p className="text-slate-400 text-xl font-medium mb-12">Contact us today for a free, no-obligation estimate in {data.contact.location}.</p>
+          <p className="text-slate-400 text-xl font-medium mb-6">Contact us today for a free, no-obligation estimate in {data.contact.location}.</p>
           <a
             href={`tel:${data.contact.phone}`}
             className="inline-flex items-center gap-4 px-12 py-7 bg-blue-600 text-white font-black rounded-[2rem] shadow-2xl transition-all hover:scale-105 active:scale-95 uppercase tracking-tighter text-xl"
@@ -470,7 +470,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
           >
             {formatPhoneNumber(data.contact.phone)} <ArrowRight size={24} />
           </a>
-          <div className="pt-20 border-t border-slate-800 flex flex-col justify-between items-center gap-8 opacity-50 text-center">
+          <div className="pt-10 border-t border-slate-800 flex flex-col justify-between items-center gap-8 opacity-50 text-center">
             <div className="space-y-4">
               <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">Services and availability may vary. Contact us to confirm details.</p>
               <div className="flex flex-col md:flex-row items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">
