@@ -66,7 +66,8 @@ const App: React.FC = () => {
           setActiveSite(latestSite); // Show it on screen
 
           // 3. Deploy it
-          const projectName = 'site-' + latestSite.id;
+          const { generateSlug } = await import('./services/urlService');
+          const projectName = generateSlug(latestSite.data.contact.companyName);
 
           setDeploymentMessage('Building and deploying your site to Vercel...');
           const result = await deploySite(latestSite.data, projectName);
@@ -79,11 +80,8 @@ const App: React.FC = () => {
 
           setDeploymentStatus('success');
 
-          // Safety check: Ensure we use the clean domain URL even if the API returns a deployment URL
-          let finalUrl = result.url;
-          if (finalUrl.includes('-') && finalUrl.includes('.vercel.app') && !finalUrl.includes(projectName + '.vercel.app')) {
-            finalUrl = `https://${projectName}.vercel.app`;
-          }
+          // Use the deterministic URL
+          const finalUrl = `https://${projectName}.vercel.app`;
 
           setDeploymentUrl(finalUrl);
           setDeploymentMessage('Success! Your site is live.');
