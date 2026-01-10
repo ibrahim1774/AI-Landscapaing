@@ -7,7 +7,7 @@ Your goal is to write high-conversion but strictly COMPLIANT landing page copy f
 
 COMPLIANCE & NEUTRALITY RULES (STRICT - FAILURE IS UNACCEPTABLE):
 1. NO GUARANTEES: Do NOT use words like "guaranteed", "will", "always", "best", "promise", "certainty", or "perfect".
-2. NO NUMBERS: Do NOT include any digits (0-9) or spelled-out numbers (e.g., "four", "ten"). This applies to years in business, project counts, and ratings.
+2. NO NUMBERS: Do NOT include any digits (0-9) or spelled-out numbers (e.g., "four", "ten"). This applies to years in business, project counts, and ratings. (EXCEPT for the phone number in CTAs).
 3. NO CERTIFICATIONS/AWARDS: Do NOT mention licenses, awards, affiliations, or certifications.
 4. NO WARRANTIES: Do NOT make outcome promises or mention warranties.
 5. NO ASSUMPTIONS: Do NOT guess years in business, availability, pricing, service area size, or experience levels.
@@ -15,15 +15,24 @@ COMPLIANCE & NEUTRALITY RULES (STRICT - FAILURE IS UNACCEPTABLE):
 7. NEUTRAL TONE: Use "We offer", "We help with", "Designed to", "Learn more", "Contact us".
 8. FOOTER: Do NOT generate a disclaimer, the application handles it.
 
-BRAND PLACEMENT: Include Company Name + Location in the Hero Headline.
+CTA REQUIREMENTS (STRICT):
+- Include exactly 3 CTAs throughout the site (Hero, Mid-page, Bottom).
+- EVERY CTA MUST include the phone number directly in the text (e.g., "Get an Estimate — Call {phone}").
+- Examples: "Call Us — {phone}", "Request Service — {phone}".
+- Do NOT include any CTA without the phone number.
+
+LOCATION PERSONALIZATION:
+- Include "{location}" in the titles of exactly 2-3 sections naturally (e.g., "Serving {location}", "Why {location} Residents Trust Us").
+- Tone should be fluid and natural, not keyword-stuffed.
 
 SECTIONS TO GENERATE:
-1. Hero: Headline (3 lines), subtext, badge, and 3-4 key features (neutral bullet points, NO numbers).
+1. Hero: Headline (3 lines), subtext, badge, stats, and ctaText (MUST include {phone}).
 2. Services: Exactly 4 distinct service cards with icons. 
-3. Value Proposition: Section headline, subtitle, descriptive content, and 3-4 highlights (process-based, neutral).
+3. Value Proposition: Section headline (personalize with {location}), subtitle, descriptive content, highlights, and ctaText (MUST include {phone}).
 4. Process: Exactly 3 logical steps from start to finish.
-5. Key Highlights: Headline and exactly 6 checklist items (neutral, no claims).
-6. FAQs: Exactly 4 common questions (neutral answers, no promises).
+5. Key Highlights: Headline (personalize with {location}) and exactly 6 checklist items.
+6. FAQs: Exactly 4 common questions.
+7. Conclusion/Footer: A final persuasive heading and ctaText (MUST include {phone}).
 
 Icon Selection: Use Lucide-react icon names in dash-case (e.g., "wrench", "shield-check", "clock").
 
@@ -51,6 +60,8 @@ export const RESPONSE_SCHEMA = {
           required: ["line1", "line2", "line3"]
         },
         subtext: { type: Type.STRING },
+        ctaText: { type: Type.STRING },
+        navCta: { type: Type.STRING },
         stats: { // Keep key name for compatibility but updated prompt restricts contents
           type: Type.ARRAY,
           items: {
@@ -93,6 +104,7 @@ export const RESPONSE_SCHEMA = {
         title: { type: Type.STRING },
         subtitle: { type: Type.STRING },
         content: { type: Type.STRING },
+        ctaText: { type: Type.STRING },
         highlights: {
           type: Type.ARRAY,
           items: { type: Type.STRING },
@@ -100,7 +112,7 @@ export const RESPONSE_SCHEMA = {
           maxItems: 4
         }
       },
-      required: ["title", "subtitle", "content", "highlights"]
+      required: ["title", "subtitle", "content", "ctaText", "highlights"]
     },
     process: {
       type: Type.OBJECT,
@@ -149,6 +161,14 @@ export const RESPONSE_SCHEMA = {
       minItems: 4,
       maxItems: 4
     },
+    footer: {
+      type: Type.OBJECT,
+      properties: {
+        headline: { type: Type.STRING },
+        ctaText: { type: Type.STRING }
+      },
+      required: ["headline", "ctaText"]
+    },
     contact: {
       type: Type.OBJECT,
       properties: {
@@ -159,7 +179,7 @@ export const RESPONSE_SCHEMA = {
       required: ["phone", "location", "companyName"]
     }
   },
-  required: ["bannerText", "hero", "services", "valueProposition", "process", "benefits", "faqs", "contact"]
+  required: ["bannerText", "hero", "services", "valueProposition", "process", "benefits", "faqs", "footer", "contact"]
 };
 
 export const STATUS_MESSAGES = [

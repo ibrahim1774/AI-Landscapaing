@@ -116,7 +116,11 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
             className="bg-blue-600 text-white px-6 py-3 rounded-full font-bold text-xs md:text-sm transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/25 active:scale-95 uppercase tracking-tight"
             style={{ backgroundColor: primaryColor }}
           >
-            Get an estimate
+            <EditableText
+              text={data.hero.navCta}
+              isEditMode={isEditMode}
+              onBlur={(val) => updateField('hero.navCta', val)}
+            />
           </a>
         </div>
       </nav>
@@ -176,7 +180,12 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
               href={`tel:${data.contact.phone}`}
               className="inline-flex items-center gap-3 px-10 py-5 bg-white text-slate-950 font-black rounded-2xl shadow-2xl transition-all hover:scale-[1.03] active:scale-[0.98] uppercase tracking-tight text-lg"
             >
-              Get An Estimate <ArrowRight size={20} />
+              <EditableText
+                text={data.hero.ctaText}
+                isEditMode={isEditMode}
+                onBlur={(val) => updateField('hero.ctaText', val)}
+              />
+              <ArrowRight size={20} />
             </a>
           </div>
         </div>
@@ -314,9 +323,22 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
               ))}
             </div>
 
-            <div className="p-8 bg-slate-50 rounded-3xl border-l-4 border-blue-600 italic text-slate-700 font-medium text-lg leading-relaxed">
+            <div className="p-8 bg-slate-50 rounded-3xl border-l-4 border-blue-600 italic text-slate-700 font-medium text-lg leading-relaxed mb-8">
               "We focus on providing consistent service and clear communication throughout every project."
             </div>
+
+            <a
+              href={`tel:${data.contact.phone}`}
+              className="inline-flex items-center gap-3 px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl shadow-xl transition-all hover:bg-blue-700 active:scale-95 uppercase tracking-tight text-base"
+              style={{ backgroundColor: primaryColor }}
+            >
+              <EditableText
+                text={data.valueProposition.ctaText}
+                isEditMode={isEditMode}
+                onBlur={(val) => updateField('valueProposition.ctaText', val)}
+              />
+              <ArrowRight size={18} />
+            </a>
           </div>
         </div>
       </section>
@@ -461,14 +483,25 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
       {/* Footer / Final CTA */}
       <section className="bg-slate-900 py-16 px-6 text-center text-white">
         <div className="max-w-3xl mx-auto space-y-10">
-          <h2 className="text-4xl md:text-7xl font-black tracking-tighter leading-none mb-4">Ready to start your project?</h2>
+          <EditableText
+            text={data.footer.headline}
+            isEditMode={isEditMode}
+            onBlur={(val) => updateField('footer.headline', val)}
+            className="text-4xl md:text-7xl font-black tracking-tighter leading-none mb-4"
+            as="h2"
+          />
           <p className="text-slate-400 text-xl font-medium mb-6">Contact us today for a free, no-obligation estimate in {data.contact.location}.</p>
           <a
             href={`tel:${data.contact.phone}`}
             className="inline-flex items-center gap-4 px-12 py-7 bg-blue-600 text-white font-black rounded-[2rem] shadow-2xl transition-all hover:scale-105 active:scale-95 uppercase tracking-tighter text-xl"
             style={{ backgroundColor: primaryColor }}
           >
-            {formatPhoneNumber(data.contact.phone)} <ArrowRight size={24} />
+            <EditableText
+              text={data.footer.ctaText}
+              isEditMode={isEditMode}
+              onBlur={(val) => updateField('footer.ctaText', val)}
+            />
+            <ArrowRight size={24} />
           </a>
           <div className="pt-10 border-t border-slate-800 flex flex-col justify-between items-center gap-8 opacity-50 text-center">
             <div className="space-y-4">

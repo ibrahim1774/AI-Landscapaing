@@ -26,6 +26,8 @@ export interface GeneratedSiteData {
       line3: string;
     };
     subtext: string;
+    ctaText: string;
+    navCta: string;
     heroImage: string;
     stats?: {
       label: string;
@@ -39,6 +41,7 @@ export interface GeneratedSiteData {
     title: string;
     subtitle: string;
     content: string;
+    ctaText: string;
     image: string;
     highlights: string[];
   };
@@ -55,6 +58,10 @@ export interface GeneratedSiteData {
     }[];
   };
   faqs: FAQItem[];
+  footer: {
+    headline: string;
+    ctaText: string;
+  };
   contact: {
     phone: string;
     location: string;
