@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { GeneratorInputs } from '../types';
+import { GeneratorInputs } from '../types.js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://jzwohodbfcwtoltsstfs.supabase.co';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_F4kb9oHazzs2zyk5kLL0FA_zxckXSIB';
@@ -10,6 +10,8 @@ export const supabase = createClient(supabaseUrl || '', supabaseAnonKey || '');
  * Persists lead data to Supabase silently.
  */
 export const saveLeadToSupabase = async (inputs: GeneratorInputs) => {
+    console.log("Supabase saveLead triggered. URL present:", !!supabaseUrl, "Key present:", !!supabaseAnonKey);
+
     if (!supabaseUrl || !supabaseAnonKey) {
         console.warn("Supabase lead capture skipped: Credentials not set.");
         return;
@@ -28,8 +30,11 @@ export const saveLeadToSupabase = async (inputs: GeneratorInputs) => {
                 }
             ]);
 
-        if (error) throw error;
-        console.log("Lead saved to Supabase silently.");
+        if (error) {
+            console.error("Supabase insert error details:", error);
+            throw error;
+        }
+        console.log("Lead saved to Supabase successfully.");
     } catch (error) {
         console.error("Failed to save lead to Supabase:", error);
     }

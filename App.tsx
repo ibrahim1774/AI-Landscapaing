@@ -112,9 +112,10 @@ const App: React.FC = () => {
 
     setIsLoading(true);
     try {
-      // Capture lead data instantly
-      const { captureLead } = await import('./services/leadService');
-      captureLead(newInputs);
+      // Capture lead data instantly (Fire and forget, but with error handling)
+      import('./services/leadService.js').then(({ captureLead }) => {
+        captureLead(newInputs).catch(err => console.error("Lead capture failed:", err));
+      }).catch(err => console.error("Lead service import failed:", err));
 
       const data = await generateSiteContent(newInputs);
       const instance: SiteInstance = {

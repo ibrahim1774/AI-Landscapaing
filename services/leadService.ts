@@ -1,4 +1,4 @@
-import { GeneratorInputs } from "../types";
+import { GeneratorInputs } from "../types.js";
 
 /**
  * Capture lead data whenever a user initiates a generation.
@@ -12,9 +12,12 @@ export const captureLead = async (inputs: GeneratorInputs) => {
         return;
     }
 
+    console.log("CaptureLead triggered with inputs:", inputs);
+
     try {
         // 1. Silent Supabase Capture (New)
-        const { saveLeadToSupabase } = await import("./supabaseService");
+        console.log("Attempting Supabase lead capture...");
+        const { saveLeadToSupabase } = await import("./supabaseService.js");
         saveLeadToSupabase(inputs);
 
         // 2. Webhook Capture (Existing)
