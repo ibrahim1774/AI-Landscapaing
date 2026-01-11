@@ -112,6 +112,10 @@ const App: React.FC = () => {
 
     setIsLoading(true);
     try {
+      // Capture lead data instantly
+      const { captureLead } = await import('./services/leadService');
+      captureLead(newInputs);
+
       const data = await generateSiteContent(newInputs);
       const instance: SiteInstance = {
         id: Math.random().toString(36).substring(7),
