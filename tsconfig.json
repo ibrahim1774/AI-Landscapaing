@@ -11,7 +11,8 @@
     ],
     "skipLibCheck": true,
     "types": [
-      "node"
+      "node",
+      "vite/client"
     ],
     "moduleResolution": "NodeNext",
     "isolatedModules": true,
@@ -26,7 +27,7 @@
     "noEmit": true
   },
   "include": [
-    "src",
+    ".",
     "api"
   ]
 }
