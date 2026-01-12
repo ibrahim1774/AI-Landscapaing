@@ -1,6 +1,6 @@
-import { GeneratedSiteData } from '../types';
+import { GeneratedSiteData } from '../types.js';
 import { renderToStaticMarkup } from 'react-dom/server';
-import SiteRenderer from '../components/SiteRenderer';
+import SiteRenderer from '../components/SiteRenderer.js';
 import React from 'react';
 
 export const deploySite = async (data: GeneratedSiteData, projectName: string) => {
@@ -119,24 +119,28 @@ export const deploySite = async (data: GeneratedSiteData, projectName: string) =
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${data.hero.headline.line1} - ${data.contact.companyName}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      body {
-        font-family: 'Inter', sans-serif;
-        background-color: white;
-        color: #0f172a;
-        margin: 0;
+      @font-face {
+        font-family: 'Avenir Light';
+        src: local('Avenir-Light'), local('Avenir Light'), local('HelveticaNeue-Light'), local('Helvetica Neue Light'), sans-serif;
+        font-weight: 300;
       }
       
+      body {
+        font-family: "Avenir Light", "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #05070A;
+        color: white;
+        margin: 0;
+        font-weight: 300;
+      }
+      
+      h1, h2, h3, h4, h5, h6, button, input, textarea, div, span, p, a {
+        font-family: "Avenir Light", "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+      }
+
       .tracking-tighter {
         letter-spacing: -0.05em;
-      }
-      
-      [contenteditable="true"]:focus {
-        outline: none;
       }
       
       @media (max-width: 640px) {
@@ -145,6 +149,8 @@ export const deploySite = async (data: GeneratedSiteData, projectName: string) =
         }
       }
     </style>
+
+
 </head>
 <body>
     ${cleanBodyHtml}
