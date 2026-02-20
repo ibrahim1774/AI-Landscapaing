@@ -40,7 +40,7 @@ const MarqueeText: React.FC<{ text: string }> = ({ text }) => {
 const SaveStatusBadge: React.FC<{ saveStatus: 'idle' | 'saving' | 'saved' }> = ({ saveStatus }) => (
   <div className="flex items-center gap-2 text-[10px] md:text-xs font-bold uppercase tracking-widest bg-white/10 px-3 py-1.5 rounded-full border border-white/20 whitespace-nowrap">
     {saveStatus === 'saving' ? (
-      <span className="flex items-center gap-1 text-blue-300">
+      <span className="flex items-center gap-1 text-green-300">
         <Loader2 size={12} className="animate-spin" /> Saving
       </span>
     ) : saveStatus === 'saved' ? (
@@ -461,7 +461,7 @@ const App: React.FC = () => {
   if (authLoading) {
     return (
       <div className="min-h-screen bg-[#05070A] flex items-center justify-center" style={{ fontFamily: '"Avenir Light", Avenir, sans-serif' }}>
-        <div className="w-10 h-10 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-green-500/20 border-t-green-500 rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -512,7 +512,7 @@ const App: React.FC = () => {
                 <button
                   onClick={handlePublish}
                   disabled={deploymentStatus === 'deploying'}
-                  className="bg-blue-600 text-white px-4 md:px-6 py-2 rounded-lg text-xs md:text-sm font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-blue-700 transition-colors disabled:opacity-50"
+                  className="bg-green-600 text-white px-4 md:px-6 py-2 rounded-lg text-xs md:text-sm font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-green-700 transition-colors disabled:opacity-50"
                 >
                   {deploymentStatus === 'deploying' ? <Loader2 className="animate-spin" size={14} /> : <Rocket size={14} />}
                   Publish
@@ -536,7 +536,7 @@ const App: React.FC = () => {
               <div className="flex items-center gap-2 shrink-0 ml-2">
                 <div className="flex items-center gap-2 text-[10px] md:text-xs font-bold uppercase tracking-widest bg-white/10 px-3 py-1.5 rounded-full border border-white/20 whitespace-nowrap">
                   {saveStatus === 'saving' ? (
-                    <span className="flex items-center gap-1 text-blue-100">
+                    <span className="flex items-center gap-1 text-green-100">
                       <Loader2 size={12} className="animate-spin" /> Saving
                     </span>
                   ) : saveStatus === 'saved' ? (
@@ -581,7 +581,7 @@ const App: React.FC = () => {
                   <button
                     onClick={handleDeploy}
                     disabled={deploymentStatus === 'deploying'}
-                    className="w-full md:w-auto bg-blue-600 text-white px-8 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20 hover:bg-blue-700 active:scale-[0.95] transition-all uppercase tracking-wider disabled:opacity-50"
+                    className="w-full md:w-auto bg-green-600 text-white px-8 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-green-500/20 hover:bg-green-700 active:scale-[0.95] transition-all uppercase tracking-wider disabled:opacity-50"
                   >
                     {deploymentStatus === 'deploying' ? <Loader2 className="animate-spin" size={18} /> : <Rocket size={18} />}
                     Deploy Website
@@ -598,8 +598,8 @@ const App: React.FC = () => {
                 {deploymentStatus === 'deploying' && (
                   <div className="flex flex-col items-center gap-6">
                     <div className="relative">
-                      <div className="w-20 h-20 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin"></div>
-                      <Rocket className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-blue-500" size={32} />
+                      <div className="w-20 h-20 border-4 border-green-500/20 border-t-green-500 rounded-full animate-spin"></div>
+                      <Rocket className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-green-500" size={32} />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-white mb-2">Deploying Site</h3>

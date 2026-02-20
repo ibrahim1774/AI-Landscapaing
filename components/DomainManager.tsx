@@ -47,7 +47,7 @@ const DomainManager: React.FC<DomainManagerProps> = ({ site, onDomainConnected }
               href={`https://${site.customDomain}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 font-bold transition-colors flex items-center gap-2"
+              className="text-green-400 hover:text-green-300 font-bold transition-colors flex items-center gap-2"
             >
               {site.customDomain} <ExternalLink size={14} />
             </a>
@@ -153,12 +153,12 @@ const DomainManager: React.FC<DomainManagerProps> = ({ site, onDomainConnected }
           onChange={(e) => setDomainInput(sanitizeDomainInput(e.target.value))}
           onKeyDown={handleKeyDown}
           placeholder="yourbusiness"
-          className="flex-1 bg-[#05070A] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-sm font-medium outline-none focus:border-blue-500 transition-colors"
+          className="flex-1 bg-[#05070A] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-sm font-medium outline-none focus:border-green-500 transition-colors"
         />
         <select
           value={selectedTld}
           onChange={(e) => setSelectedTld(e.target.value)}
-          className="bg-[#05070A] border border-white/10 rounded-xl px-3 py-3 text-white text-sm font-medium outline-none focus:border-blue-500 transition-colors appearance-none cursor-pointer"
+          className="bg-[#05070A] border border-white/10 rounded-xl px-3 py-3 text-white text-sm font-medium outline-none focus:border-green-500 transition-colors appearance-none cursor-pointer"
         >
           {TLD_OPTIONS.map(tld => (
             <option key={tld} value={tld}>{tld}</option>
@@ -202,7 +202,7 @@ const DomainManager: React.FC<DomainManagerProps> = ({ site, onDomainConnected }
               <button
                 onClick={handleBuyDomain}
                 disabled={isPurchasing}
-                className="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="bg-green-600 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-green-700 transition-colors disabled:opacity-50 flex items-center gap-2"
               >
                 {isPurchasing && <Loader2 size={16} className="animate-spin" />}
                 Buy Domain {searchResult.gbpPrice ? `— £${searchResult.gbpPrice.toFixed(2)}` : ''}

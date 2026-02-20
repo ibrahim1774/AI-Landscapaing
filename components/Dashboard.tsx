@@ -60,7 +60,7 @@ const Dashboard: React.FC<DashboardProps> = ({ site, onEditSite, onSignOut, onSi
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
               <Zap size={18} className="text-white" />
             </div>
             <span className="text-lg font-bold tracking-tight">PrimeHub AI</span>
@@ -72,7 +72,7 @@ const Dashboard: React.FC<DashboardProps> = ({ site, onEditSite, onSignOut, onSi
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="flex items-center gap-2 hover:bg-white/5 px-3 py-2 rounded-xl transition-colors"
             >
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold">
+              <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-sm font-bold">
                 {userInitial}
               </div>
               <span className="hidden md:inline text-sm font-medium text-gray-300">
@@ -163,7 +163,7 @@ const Dashboard: React.FC<DashboardProps> = ({ site, onEditSite, onSignOut, onSi
                       href={site.deployedUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
+                      className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 text-sm font-medium transition-colors"
                     >
                       {site.deployedUrl} <ExternalLink size={14} />
                     </a>
@@ -224,7 +224,7 @@ const Dashboard: React.FC<DashboardProps> = ({ site, onEditSite, onSignOut, onSi
             <div className="text-sm text-gray-300 mb-2">Questions / Support / Cancellations</div>
             <a
               href="mailto:ibrahim3709@gmail.com"
-              className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
+              className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 text-sm font-medium transition-colors"
             >
               <Mail size={14} /> ibrahim3709@gmail.com
             </a>

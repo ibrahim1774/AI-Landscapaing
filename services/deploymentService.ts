@@ -39,9 +39,9 @@ export const deploySite = async (data: GeneratedSiteData, projectName: string) =
         letter-spacing: -0.05em;
       }
       
-      .selection\:bg-blue-100 *::selection {
-        background-color: #dbeafe;
-        color: #1e40af;
+      .selection\:bg-green-100 *::selection {
+        background-color: #dcfce7;
+        color: #14532d;
       }
       
       /* ContentEditable Clean Focus */

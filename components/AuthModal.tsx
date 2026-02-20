@@ -65,7 +65,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode, onA
     setError('');
   };
 
-  const inputClass = 'w-full bg-transparent border-b border-white/10 focus:border-blue-500 text-white placeholder-gray-500 py-3 pl-10 pr-4 outline-none transition-colors text-sm';
+  const inputClass = 'w-full bg-transparent border-b border-white/10 focus:border-green-500 text-white placeholder-gray-500 py-3 pl-10 pr-4 outline-none transition-colors text-sm';
 
   return (
     <div className="fixed inset-0 z-[200] bg-black/80 backdrop-blur-sm flex items-center justify-center p-6">
@@ -87,7 +87,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode, onA
               onClick={() => { setMode('signin'); setError(''); }}
               className={`flex-1 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-all ${
                 mode === 'signin'
-                  ? 'bg-blue-600 text-white shadow-lg'
+                  ? 'bg-green-600 text-white shadow-lg'
                   : 'text-gray-400 hover:text-white'
               }`}
             >
@@ -97,7 +97,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode, onA
               onClick={() => { setMode('signup'); setError(''); }}
               className={`flex-1 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-all ${
                 mode === 'signup'
-                  ? 'bg-blue-600 text-white shadow-lg'
+                  ? 'bg-green-600 text-white shadow-lg'
                   : 'text-gray-400 hover:text-white'
               }`}
             >
@@ -157,7 +157,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode, onA
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+            className="w-full bg-green-600 text-white py-3 rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-green-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
           >
             {isSubmitting && <Loader2 size={16} className="animate-spin" />}
             {mode === 'signup' ? 'Create Account' : 'Sign In'}
@@ -169,13 +169,13 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode, onA
           <p className="text-center text-gray-500 text-sm mt-6">
             {mode === 'signin' ? (
               <>Don't have an account?{' '}
-                <button onClick={switchMode} className="text-blue-400 hover:text-blue-300 font-bold">
+                <button onClick={switchMode} className="text-green-400 hover:text-green-300 font-bold">
                   Sign Up
                 </button>
               </>
             ) : (
               <>Already have an account?{' '}
-                <button onClick={switchMode} className="text-blue-400 hover:text-blue-300 font-bold">
+                <button onClick={switchMode} className="text-green-400 hover:text-green-300 font-bold">
                   Sign In
                 </button>
               </>

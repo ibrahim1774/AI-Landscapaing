@@ -34,14 +34,14 @@ const LoadingIndicator: React.FC = () => {
     <div className="fixed inset-0 z-[100] bg-[#05070A] flex flex-col items-center justify-center p-6 font-light" style={{ fontFamily: '"Avenir Light", Avenir, sans-serif' }}>
       <div className="w-full max-w-md space-y-12 text-center">
         <div className="relative w-28 h-28 mx-auto">
-          <div className="absolute inset-0 border-[3px] border-blue-500/10 rounded-3xl rotate-12"></div>
-          <div className="absolute inset-0 border-[3px] border-blue-500/30 rounded-3xl -rotate-6"></div>
+          <div className="absolute inset-0 border-[3px] border-green-500/10 rounded-3xl rotate-12"></div>
+          <div className="absolute inset-0 border-[3px] border-green-500/30 rounded-3xl -rotate-6"></div>
           <div
-            className="absolute inset-0 border-[3px] border-blue-500 rounded-3xl border-t-transparent animate-spin"
+            className="absolute inset-0 border-[3px] border-green-500 rounded-3xl border-t-transparent animate-spin"
             style={{ animationDuration: '2s' }}
           ></div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <Zap size={32} className="text-blue-500 fill-blue-500 animate-pulse" />
+            <Zap size={32} className="text-green-500 fill-green-500 animate-pulse" />
           </div>
         </div>
 
@@ -58,12 +58,12 @@ const LoadingIndicator: React.FC = () => {
           <div className="relative pt-4">
             <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
               <div
-                className="h-full bg-blue-500 transition-all duration-700 ease-out shadow-[0_0_10px_rgba(59,130,246,0.5)]"
+                className="h-full bg-green-500 transition-all duration-700 ease-out shadow-[0_0_10px_rgba(22,163,74,0.5)]"
                 style={{ width: `${progress}%` }}
               ></div>
             </div>
             <div
-              className="absolute top-0 right-0 -mt-1 text-[10px] font-bold text-blue-400 bg-[#05070A] px-2"
+              className="absolute top-0 right-0 -mt-1 text-[10px] font-bold text-green-400 bg-[#05070A] px-2"
               style={{ left: `calc(${progress}% - 20px)` }}
             >
               {Math.floor(progress)}%

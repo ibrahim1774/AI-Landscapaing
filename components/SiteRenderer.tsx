@@ -35,7 +35,7 @@ const EditableText: React.FC<{
     <Tag
       contentEditable={isEditMode}
       suppressContentEditableWarning
-      className={`${className} ${isEditMode ? 'hover:ring-2 hover:ring-blue-400/30 transition-all outline-none focus:ring-2 focus:ring-blue-500/50 rounded-sm' : ''}`}
+      className={`${className} ${isEditMode ? 'hover:ring-2 hover:ring-green-400/30 transition-all outline-none focus:ring-2 focus:ring-green-500/50 rounded-sm' : ''}`}
       onBlur={handleBlur}
       style={style}
     >
@@ -85,8 +85,8 @@ const EditableImage: React.FC<{
       {isEditMode && !isUploading && (
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 z-20">
           <div className="bg-white px-4 py-2 rounded-full shadow-2xl flex items-center gap-2 transform group-hover:scale-105 transition-transform">
-            <Camera className="text-blue-600 w-5 h-5" />
-            <span className="text-blue-900 font-bold text-xs uppercase tracking-tight">Replace Image</span>
+            <Camera className="text-green-600 w-5 h-5" />
+            <span className="text-green-900 font-bold text-xs uppercase tracking-tight">Replace Image</span>
           </div>
         </div>
       )}
@@ -140,8 +140,8 @@ const GalleryImageSlot: React.FC<{
             className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-3xl z-20 cursor-pointer"
           >
             <div className="bg-white px-4 py-2 rounded-full shadow-2xl flex items-center gap-2">
-              <Camera className="text-blue-600 w-5 h-5" />
-              <span className="text-blue-900 font-bold text-xs uppercase tracking-tight">Replace Image</span>
+              <Camera className="text-green-600 w-5 h-5" />
+              <span className="text-green-900 font-bold text-xs uppercase tracking-tight">Replace Image</span>
             </div>
           </div>
           {/* Delete button */}
@@ -184,10 +184,10 @@ const EmptyGallerySlot: React.FC<{
   return (
     <div
       onClick={() => fileInputRef.current?.click()}
-      className="w-full h-full border-2 border-dashed border-slate-300 rounded-3xl flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-all"
+      className="w-full h-full border-2 border-dashed border-slate-300 rounded-3xl flex flex-col items-center justify-center cursor-pointer hover:border-green-400 hover:bg-green-50/50 transition-all"
     >
       {isUploading ? (
-        <div className="flex items-center gap-2 text-blue-500 font-bold text-sm">
+        <div className="flex items-center gap-2 text-green-500 font-bold text-sm">
           <Loader2 className="animate-spin" size={20} /> Uploading...
         </div>
       ) : (
@@ -202,7 +202,7 @@ const EmptyGallerySlot: React.FC<{
 };
 
 const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate }) => {
-  const primaryColor = '#2563eb'; // Default premium blue
+  const primaryColor = '#16a34a'; // Premium landscaping green
 
   const updateField = (path: string, val: any) => {
     if (!onUpdate) return;
@@ -218,7 +218,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 font-sans antialiased">
+    <div className="min-h-screen bg-white text-slate-900 selection:bg-green-100 font-sans antialiased">
       {/* Navigation */}
       <nav className="sticky top-0 left-0 right-0 z-[100] bg-white/90 backdrop-blur-xl border-b border-slate-100 py-4 px-6 md:px-12 flex justify-between items-center">
         <div className="flex-1">
@@ -236,7 +236,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
           </div>
           <a
             href={`tel:${data.contact.phone}`}
-            className="bg-blue-600 text-white px-6 py-3 rounded-full font-bold text-xs md:text-sm transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/25 active:scale-95 uppercase tracking-tight"
+            className="bg-green-600 text-white px-6 py-3 rounded-full font-bold text-xs md:text-sm transition-all hover:bg-green-700 hover:shadow-lg hover:shadow-green-500/25 active:scale-95 uppercase tracking-tight"
             style={{ backgroundColor: primaryColor }}
           >
             <EditableText
@@ -263,8 +263,8 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-400/30 text-blue-100 text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase">
-              <Sparkles size={14} className="text-blue-400" />
+            <div className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full bg-green-500/20 backdrop-blur-md border border-green-400/30 text-green-100 text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase">
+              <Sparkles size={14} className="text-green-400" />
               <EditableText
                 text={data.hero.badge}
                 isEditMode={isEditMode}
@@ -282,7 +282,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
                 text={data.hero.headline.line2}
                 isEditMode={isEditMode}
                 onBlur={(val) => updateField('hero.headline.line2', val)}
-                className="block text-blue-600"
+                className="block text-green-600"
                 style={{ color: primaryColor }}
               />
             </h1>
@@ -330,7 +330,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
                     stats[idx].label = val;
                     updateField('hero.stats', stats);
                   }}
-                  className="text-blue-200 text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-70"
+                  className="text-green-200 text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-70"
                 />
               </div>
             ))}
@@ -342,14 +342,14 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
       <section className="py-12 md:py-18 px-6 md:px-12 bg-slate-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <div className="text-blue-600 font-black text-xs uppercase tracking-[0.2em] mb-4">What We Do</div>
+            <div className="text-green-600 font-black text-xs uppercase tracking-[0.2em] mb-4">What We Do</div>
             <h2 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 mb-6">Expert Solutions</h2>
-            <div className="w-24 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
+            <div className="w-24 h-1.5 bg-green-600 mx-auto rounded-full"></div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {data.services.cards.map((service, idx) => (
-              <div key={idx} className="group bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 h-full flex flex-col">
+              <div key={idx} className="group bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 hover:border-green-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 h-full flex flex-col">
                 <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-transform group-hover:rotate-12 group-hover:scale-110" style={{ backgroundColor: `${primaryColor}10`, color: primaryColor }}>
                   <IconRenderer name={service.icon} className="w-8 h-8" />
                 </div>
@@ -374,7 +374,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
                   }}
                   className="text-slate-500 text-base font-medium leading-relaxed flex-grow"
                 />
-                <div className="mt-8 flex items-center gap-2 text-sm font-bold text-blue-600 group-hover:gap-3 transition-all cursor-pointer">
+                <div className="mt-8 flex items-center gap-2 text-sm font-bold text-green-600 group-hover:gap-3 transition-all cursor-pointer">
                   Learn more <ArrowRight size={16} />
                 </div>
               </div>
@@ -387,8 +387,8 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
       <section className="py-12 md:py-20 px-6 md:px-12 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20">
           <div className="lg:w-1/2 relative">
-            <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-200 rounded-full blur-3xl opacity-50"></div>
+            <div className="absolute -top-10 -left-10 w-40 h-40 bg-green-100 rounded-full blur-3xl opacity-50"></div>
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-green-200 rounded-full blur-3xl opacity-50"></div>
             <EditableImage
               src={data.valueProposition.image}
               alt="Action"
@@ -403,7 +403,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
                 text={data.valueProposition.subtitle}
                 isEditMode={isEditMode}
                 onBlur={(val) => updateField('valueProposition.subtitle', val)}
-                className="text-blue-600 font-bold text-xs uppercase tracking-[0.2em] mb-4"
+                className="text-green-600 font-bold text-xs uppercase tracking-[0.2em] mb-4"
               />
               <EditableText
                 text={data.valueProposition.title}
@@ -423,7 +423,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {data.valueProposition.highlights.map((highlight, idx) => (
                 <div key={idx} className="flex gap-4 items-start">
-                  <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0 mt-1">
+                  <div className="w-6 h-6 rounded-full bg-green-600 flex items-center justify-center text-white shrink-0 mt-1">
                     <CheckCircle size={14} />
                   </div>
                   <EditableText
@@ -440,13 +440,13 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
               ))}
             </div>
 
-            <div className="p-8 bg-slate-50 rounded-3xl border-l-4 border-blue-600 italic text-slate-700 font-medium text-lg leading-relaxed mb-8">
+            <div className="p-8 bg-slate-50 rounded-3xl border-l-4 border-green-600 italic text-slate-700 font-medium text-lg leading-relaxed mb-8">
               "We focus on providing consistent service and clear communication throughout every project."
             </div>
 
             <a
               href={`tel:${data.contact.phone}`}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl shadow-xl transition-all hover:bg-blue-700 active:scale-95 uppercase tracking-tight text-base"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-green-600 text-white font-bold rounded-2xl shadow-xl transition-all hover:bg-green-700 active:scale-95 uppercase tracking-tight text-base"
               style={{ backgroundColor: primaryColor }}
             >
               <EditableText
@@ -474,8 +474,8 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-10">
             {data.benefits.items.map((benefit, idx) => (
-              <div key={idx} className="flex items-center gap-6 p-6 rounded-2xl bg-slate-50 border border-transparent hover:border-blue-100 transition-colors">
-                <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0">
+              <div key={idx} className="flex items-center gap-6 p-6 rounded-2xl bg-slate-50 border border-transparent hover:border-green-100 transition-colors">
+                <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white shrink-0">
                   <CheckCircle size={20} />
                 </div>
                 <EditableText
@@ -496,11 +496,11 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
 
       {/* Process Section (Dark) */}
       <section className="py-12 md:py-20 px-6 md:px-12 bg-slate-950 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-600/10 skew-x-12 translate-x-1/2"></div>
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-green-600/10 skew-x-12 translate-x-1/2"></div>
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8">
             <div className="max-w-2xl">
-              <div className="text-blue-400 font-bold text-xs uppercase tracking-[0.2em] mb-4">Our Method</div>
+              <div className="text-green-400 font-bold text-xs uppercase tracking-[0.2em] mb-4">Our Method</div>
               <EditableText
                 text={data.process.title}
                 isEditMode={isEditMode}
@@ -509,7 +509,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
                 as="h2"
               />
             </div>
-            <div className="text-slate-400 font-bold max-w-sm md:text-right border-l md:border-l-0 md:border-r border-blue-500/30 pl-8 md:pl-0 md:pr-8 uppercase tracking-widest text-xs leading-relaxed">
+            <div className="text-slate-400 font-bold max-w-sm md:text-right border-l md:border-l-0 md:border-r border-green-500/30 pl-8 md:pl-0 md:pr-8 uppercase tracking-widest text-xs leading-relaxed">
               Transparent & Professional Workflow From Start To Finish
             </div>
           </div>
@@ -520,7 +520,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
                 {idx < 2 && (
                   <div className="hidden md:block absolute top-10 -right-6 w-12 h-px bg-slate-800 z-0"></div>
                 )}
-                <div className="w-20 h-20 rounded-3xl bg-blue-600 flex items-center justify-center text-white text-3xl font-black mb-10 transition-transform group-hover:scale-110 shadow-2xl shadow-blue-500/20">
+                <div className="w-20 h-20 rounded-3xl bg-green-600 flex items-center justify-center text-white text-3xl font-black mb-10 transition-transform group-hover:scale-110 shadow-2xl shadow-green-500/20">
                   {idx + 1}
                 </div>
                 <EditableText
@@ -576,7 +576,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
               <div className="space-y-4 md:space-y-6">
                 {data.whoWeHelp.bullets.map((bullet, idx) => (
                   <div key={idx} className="flex items-start gap-3 md:gap-4 group">
-                    <div className="mt-1.5 w-2 h-2 rounded-full bg-blue-600 shrink-0" style={{ backgroundColor: primaryColor }} />
+                    <div className="mt-1.5 w-2 h-2 rounded-full bg-green-600 shrink-0" style={{ backgroundColor: primaryColor }} />
                     <EditableText
                       text={bullet}
                       isEditMode={isEditMode}
@@ -600,7 +600,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
         <section className="py-12 md:py-20 px-6 md:px-12 bg-slate-50">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <div className="text-blue-600 font-black text-xs uppercase tracking-[0.2em] mb-4">Our Work</div>
+              <div className="text-green-600 font-black text-xs uppercase tracking-[0.2em] mb-4">Our Work</div>
               <EditableText
                 text={data.gallery.title || 'Gallery'}
                 isEditMode={isEditMode}
@@ -614,7 +614,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
                 onBlur={(val) => updateField('gallery.subtitle', val)}
                 className="text-slate-500 text-lg font-medium"
               />
-              <div className="w-24 h-1.5 bg-blue-600 mx-auto rounded-full mt-6"></div>
+              <div className="w-24 h-1.5 bg-green-600 mx-auto rounded-full mt-6"></div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -658,16 +658,16 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
       <section className="py-12 md:py-20 px-6 md:px-12 bg-slate-50">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <div className="text-blue-600 font-bold text-xs uppercase tracking-[0.2em] mb-4">FAQ</div>
+            <div className="text-green-600 font-bold text-xs uppercase tracking-[0.2em] mb-4">FAQ</div>
             <h2 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-6">Common Questions</h2>
-            <div className="w-20 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
+            <div className="w-20 h-1.5 bg-green-600 mx-auto rounded-full"></div>
           </div>
 
           <div className="space-y-6">
             {data.faqs.map((faq, idx) => (
-              <div key={idx} className="bg-white rounded-[2rem] p-8 md:p-10 shadow-sm border border-slate-100 group hover:border-blue-100 transition-all">
+              <div key={idx} className="bg-white rounded-[2rem] p-8 md:p-10 shadow-sm border border-slate-100 group hover:border-green-100 transition-all">
                 <div className="flex gap-6">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-green-50 flex items-center justify-center text-green-600 shrink-0">
                     <HelpCircle size={24} />
                   </div>
                   <div className="space-y-4">
@@ -713,7 +713,7 @@ const SiteRenderer: React.FC<SiteRendererProps> = ({ data, isEditMode, onUpdate 
           <p className="text-slate-400 text-xl font-medium mb-6">Contact us today for a free, no-obligation estimate in {data.contact.location}.</p>
           <a
             href={`tel:${data.contact.phone}`}
-            className="inline-flex items-center gap-4 px-12 py-7 bg-blue-600 text-white font-black rounded-[2rem] shadow-2xl transition-all hover:scale-105 active:scale-95 uppercase tracking-tighter text-xl"
+            className="inline-flex items-center gap-4 px-12 py-7 bg-green-600 text-white font-black rounded-[2rem] shadow-2xl transition-all hover:scale-105 active:scale-95 uppercase tracking-tighter text-xl"
             style={{ backgroundColor: primaryColor }}
           >
             <EditableText

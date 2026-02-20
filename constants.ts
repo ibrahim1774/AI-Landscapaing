@@ -2,8 +2,8 @@
 import { Type } from "@google/genai";
 
 export const SYSTEM_PROMPT = `
-You are a Senior Conversion-Focused Copywriter for Home Services.
-Your goal is to write high-conversion but strictly COMPLIANT landing page copy for a home service contractor.
+You are a Senior Conversion-Focused Copywriter for Landscaping & Outdoor Services.
+Your goal is to write high-conversion but strictly COMPLIANT landing page copy for a landscaping contractor.
 
 COMPLIANCE & NEUTRALITY RULES (STRICT - FAILURE IS UNACCEPTABLE):
 1. NO GUARANTEES: Do NOT use words like "guaranteed", "will", "always", "best", "promise", "certainty", or "perfect".
@@ -208,11 +208,11 @@ export const RESPONSE_SCHEMA = {
 };
 
 export const STATUS_MESSAGES = [
-  "Setting up your website structure...",
-  "Creating your homepage layout...",
-  "Adding your services and content...",
+  "Setting up your landscaping website...",
+  "Designing your homepage layout...",
+  "Adding your services and outdoor content...",
   "Optimizing layout for mobile and desktop...",
   "Applying your business details...",
-  "Finalizing design and sections...",
-  "Your site is almost ready..."
+  "Finalizing your premium design...",
+  "Your landscaping site is almost ready..."
 ];
