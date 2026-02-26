@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { AssetUploader } from './lib/storage.js';
-import { HtmlRewriter } from './lib/rewriter.js';
-import { VercelDeployer } from './lib/deployment.js';
+import { AssetUploader } from './_lib/storage.js';
+import { HtmlRewriter } from './_lib/rewriter.js';
+import { VercelDeployer } from './_lib/deployment.js';
 import * as path from 'path';
 import * as fs from 'fs';
 

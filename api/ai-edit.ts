@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { GoogleGenAI } from "@google/genai";
-import { RESPONSE_SCHEMA } from './lib/schema.js';
+import { RESPONSE_SCHEMA } from './_lib/schema.js';
 
 const AI_EDIT_SYSTEM_PROMPT = `
 You are an AI editor for a landscaping business website. You will receive:
