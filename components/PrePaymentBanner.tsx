@@ -12,21 +12,21 @@ const STEPS = [
     emoji: '🎨',
     title: 'Fully Custom Site Built For You',
     description:
-      'A complete, professional website tailored specifically to your business, ready to go live. No need to pay hundreds of dollars upfront or shell out big monthly fees to a developer or agency.',
+      'A complete, professional website tailored to your business — no big upfront costs or expensive developer fees.',
   },
   {
     number: '02',
     emoji: '🔧',
     title: 'Account Access',
     description:
-      'After our monthly hosting fee to keep your site live, you will have an opportunity to make an account with us, so you can swap images, change text, update your page anytime. Your site, your account, total control. A professional, modern way to manage your online presence.',
+      'After deploying, create an account to swap images, change text, and update your page anytime.',
   },
   {
     number: '03',
     emoji: '💰',
     title: 'Save Time & Money',
     description:
-      'No need to hire a developer, pay for expensive website builders, or learn to code. Just pay a small monthly hosting fee to keep the site live — everything else is handled. No hundreds of dollars a month, no big upfront costs.',
+      'No need to hire a developer or learn to code. Just pay a small monthly hosting fee — everything else is handled.',
   },
 ];
 
@@ -34,7 +34,6 @@ const PrePaymentBanner: React.FC<PrePaymentBannerProps> = ({ onDeploy, isDeployi
   const [isBannerVisible, setIsBannerVisible] = useState(false);
   const [isBannerDismissed, setIsBannerDismissed] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   // Check for mobile viewport
@@ -118,13 +117,11 @@ const PrePaymentBanner: React.FC<PrePaymentBannerProps> = ({ onDeploy, isDeployi
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
               </span>
               <p className="text-sm text-[#e2e8f0] leading-relaxed" style={{ fontFamily: '"DM Sans", sans-serif' }}>
-                You're viewing a <span className="font-semibold text-white">sample preview</span> — your real site will be{' '}
-                <span className="font-semibold text-white">fully custom</span>. Edit any text, swap any images, and make changes
-                anytime.{' '}
+                Just pay for hosting—it's{' '}
                 <span className="font-semibold text-green-400" style={{ fontFamily: '"Instrument Serif", serif' }}>
-                  $10/mo
-                </span>{' '}
-                hosting.
+                  $10/month
+                </span>
+                . You can make an account after deploying the site and change the text and images as well.
               </p>
             </div>
 
@@ -219,9 +216,7 @@ const PrePaymentBanner: React.FC<PrePaymentBannerProps> = ({ onDeploy, isDeployi
               {STEPS.map((step, i) => (
                 <div
                   key={i}
-                  onMouseEnter={() => setHoveredStep(i)}
-                  onMouseLeave={() => setHoveredStep(null)}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-4 cursor-default hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300"
+                  className="bg-white/5 border border-white/10 rounded-2xl p-4"
                 >
                   <div className="flex items-center gap-3">
                     <span className="text-2xl shrink-0">{step.emoji}</span>
@@ -243,22 +238,12 @@ const PrePaymentBanner: React.FC<PrePaymentBannerProps> = ({ onDeploy, isDeployi
                     </div>
                   </div>
 
-                  {/* Expandable description */}
-                  <div
-                    className="overflow-hidden transition-all duration-300 ease-out"
-                    style={{
-                      maxHeight: hoveredStep === i ? '200px' : '0px',
-                      opacity: hoveredStep === i ? 1 : 0,
-                      marginTop: hoveredStep === i ? '12px' : '0px',
-                    }}
+                  <p
+                    className="text-[#94a3b8] text-sm pl-11 leading-relaxed mt-2"
+                    style={{ fontFamily: '"DM Sans", sans-serif' }}
                   >
-                    <p
-                      className="text-[#94a3b8] text-sm pl-11 leading-relaxed"
-                      style={{ fontFamily: '"DM Sans", sans-serif' }}
-                    >
-                      {step.description}
-                    </p>
-                  </div>
+                    {step.description}
+                  </p>
                 </div>
               ))}
             </div>
