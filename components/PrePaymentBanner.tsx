@@ -164,7 +164,7 @@ const PrePaymentBanner: React.FC<PrePaymentBannerProps> = ({ onDeploy, isDeployi
           }}
         >
           <div
-            className="border border-white/10 rounded-3xl max-w-lg w-full shadow-2xl p-5 md:p-8 relative overflow-y-auto max-h-[90vh]"
+            className="border border-white/10 rounded-3xl max-w-lg w-full shadow-2xl p-4 md:p-8 relative overflow-y-auto max-h-[90vh]"
             style={{
               fontFamily: '"DM Sans", sans-serif',
               background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%)',
@@ -181,7 +181,7 @@ const PrePaymentBanner: React.FC<PrePaymentBannerProps> = ({ onDeploy, isDeployi
             </button>
 
             {/* Site Preview badge */}
-            <div className="flex items-center justify-center gap-2 mb-6">
+            <div className="flex items-center justify-center gap-2 mb-4">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
@@ -207,7 +207,7 @@ const PrePaymentBanner: React.FC<PrePaymentBannerProps> = ({ onDeploy, isDeployi
 
             {/* Subtitle */}
             <p
-              className="text-[#94a3b8] text-sm text-center mb-8 max-w-md mx-auto leading-relaxed"
+              className="text-[#94a3b8] text-sm text-center mb-4 max-w-md mx-auto leading-relaxed"
               style={{ fontFamily: '"DM Sans", sans-serif' }}
             >
               What you're seeing is a sample proof of concept. When you deploy, your real site gets built with full account
@@ -215,7 +215,7 @@ const PrePaymentBanner: React.FC<PrePaymentBannerProps> = ({ onDeploy, isDeployi
             </p>
 
             {/* Steps */}
-            <div className="space-y-3 mb-6">
+            <div className="space-y-2 mb-4">
               {STEPS.map((step, i) => (
                 <div
                   key={i}
@@ -247,9 +247,9 @@ const PrePaymentBanner: React.FC<PrePaymentBannerProps> = ({ onDeploy, isDeployi
                   <div
                     className="overflow-hidden transition-all duration-300 ease-out"
                     style={{
-                      maxHeight: hoveredStep === i || isMobile ? '200px' : '0px',
-                      opacity: hoveredStep === i || isMobile ? 1 : 0,
-                      marginTop: hoveredStep === i || isMobile ? '12px' : '0px',
+                      maxHeight: hoveredStep === i ? '200px' : '0px',
+                      opacity: hoveredStep === i ? 1 : 0,
+                      marginTop: hoveredStep === i ? '12px' : '0px',
                     }}
                   >
                     <p
