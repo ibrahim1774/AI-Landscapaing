@@ -6,6 +6,9 @@ import LoadingIndicator from './components/LoadingIndicator.js';
 import AuthModal from './components/AuthModal.js';
 import DeploymentSuccessModal from './components/DeploymentSuccessModal.js';
 import Dashboard from './components/Dashboard.js';
+import AiEditPromptBox from './components/AiEditPromptBox.js';
+import PrePaymentBanner from './components/PrePaymentBanner.js';
+import { applyAiEdit } from './services/aiEditService.js';
 import { generateSiteContent } from './services/geminiService.js';
 import { saveSite, loadUserSite, migrateSiteToUser } from './services/siteService.js';
 import { saveSiteInstance, getAllSites } from './services/storageService.js';
@@ -77,6 +80,12 @@ const App: React.FC = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authModalMode, setAuthModalMode] = useState<'signin' | 'signup'>('signup');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  // AI Edit state
+  const [isAiEditing, setIsAiEditing] = useState(false);
+  const [aiEditError, setAiEditError] = useState<string | null>(null);
+  const [lastAiInstruction, setLastAiInstruction] = useState('');
+  const [undoStack, setUndoStack] = useState<GeneratedSiteData[]>([]);
 
   // ─── On authenticated load, navigate to dashboard and load site ───
   useEffect(() => {
@@ -457,6 +466,44 @@ const App: React.FC = () => {
     }
   }, [isAuthenticated]);
 
+  // ─── AI Edit handlers ───
+  const handleAiEdit = useCallback(async (instruction: string) => {
+    if (!activeSite) return;
+
+    setIsAiEditing(true);
+    setAiEditError(null);
+    setLastAiInstruction(instruction);
+
+    // Push current state onto undo stack before making changes
+    setUndoStack(prev => [...prev.slice(-9), activeSite.data]);
+
+    try {
+      const result = await applyAiEdit(instruction, activeSite.data);
+
+      if (result.success && result.data) {
+        updateSiteData(result.data);
+      } else {
+        setAiEditError(result.error || 'AI edit failed');
+        setUndoStack(prev => prev.slice(0, -1));
+      }
+    } catch (err: any) {
+      setAiEditError(err.message || 'Something went wrong');
+      setUndoStack(prev => prev.slice(0, -1));
+    } finally {
+      setIsAiEditing(false);
+    }
+  }, [activeSite, updateSiteData]);
+
+  const handleAiUndo = useCallback(() => {
+    if (undoStack.length === 0 || !activeSite) return;
+
+    const previousData = undoStack[undoStack.length - 1];
+    setUndoStack(prev => prev.slice(0, -1));
+    updateSiteData(previousData);
+    setLastAiInstruction('');
+    setAiEditError(null);
+  }, [undoStack, activeSite, updateSiteData]);
+
   // ─── AppReady guard ───
   if (authLoading) {
     return (
@@ -551,7 +598,7 @@ const App: React.FC = () => {
             </div>
           )}
 
-          <main className={`bg-white ${isPostPayment ? '' : 'pb-[340px] md:pb-52'}`}>
+          <main className={`bg-white ${isPostPayment ? '' : 'pb-36 md:pb-28'}`}>
             <SiteRenderer
               data={activeSite.data}
               isEditMode={true}
@@ -559,36 +606,21 @@ const App: React.FC = () => {
             />
           </main>
 
-          {/* Pre-payment bottom bar */}
-          {!isPostPayment && (
-            <div className="fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-gray-100 p-4 md:p-5 shadow-[0_-8px_20px_rgba(0,0,0,0.05)]">
-              <div className="max-w-3xl mx-auto space-y-4">
-                {/* HOW IT WORKS + steps */}
-                <div className="text-center">
-                  <p className="text-black font-bold text-sm uppercase tracking-[0.2em] mb-2">How It Works</p>
-                  <div className="flex flex-col md:flex-row md:justify-center md:gap-6 gap-1">
-                    <span className="text-black font-bold text-sm">1. Edit your text & images above</span>
-                    <span className="text-black font-bold text-sm">2. Click deploy when ready</span>
-                    <span className="text-black font-bold text-sm">3. Your site goes live instantly</span>
-                  </div>
-                </div>
+          {/* AI Edit Prompt Box (post-payment only) */}
+          {isPostPayment && (
+            <AiEditPromptBox
+              onSubmit={handleAiEdit}
+              onUndo={handleAiUndo}
+              isProcessing={isAiEditing}
+              canUndo={undoStack.length > 0}
+              lastInstruction={lastAiInstruction}
+              error={aiEditError}
+            />
+          )}
 
-                {/* Pricing + deploy button */}
-                <div className="flex flex-col md:flex-row items-center justify-center gap-3">
-                  <p className="text-black font-bold text-sm uppercase tracking-tight text-center">
-                    PAY ONLY $10/MONTH WEBSITE HOSTING TO HAVE YOUR CUSTOM SITE LIVE & ACTIVE
-                  </p>
-                  <button
-                    onClick={handleDeploy}
-                    disabled={deploymentStatus === 'deploying'}
-                    className="w-full md:w-auto bg-green-600 text-white px-8 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-green-500/20 hover:bg-green-700 active:scale-[0.95] transition-all uppercase tracking-wider disabled:opacity-50"
-                  >
-                    {deploymentStatus === 'deploying' ? <Loader2 className="animate-spin" size={18} /> : <Rocket size={18} />}
-                    Deploy Website
-                  </button>
-                </div>
-              </div>
-            </div>
+          {/* Pre-payment bottom banner */}
+          {!isPostPayment && (
+            <PrePaymentBanner onDeploy={handleDeploy} isDeploying={deploymentStatus === 'deploying'} />
           )}
 
           {/* Deployment Status Overlay (deploying / error states) */}
